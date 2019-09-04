@@ -1,0 +1,49 @@
+
+syntax = "proto3";
+
+package pb;
+
+message Article {
+
+    // Untuk model `Repeated`
+    message Tags {
+        int32 tag_id = 1;
+        string name = 2;
+    }
+    
+    // Untuk model `Map`
+    message SocialMediaStatisticField {
+        int32 Like = 1;
+        int32 Share = 2;
+        int32 Comments = 3;
+    }
+    
+    // Model `Enumerations`
+    enum StatusType {
+        DRAFT = 0;
+        PUBLISHED = 1;
+        UNPUBLISHED = 2;
+    }
+    
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+    
+    // Implement Enumerations
+    StatusType status = 4;
+    
+    // Implement Array Value
+    repeated Tags tags = 5;
+    
+    // Impelemnt Maps
+    map<string, SocialMediaStatisticField> SocialMediaStatistic = 6;
+    
+    // Model `Oneof`
+    oneof process_oneof {
+        bool insert = 7;
+        bool update = 8;
+        bool delete = 9;
+        bool archive = 10;
+    }
+
+}
